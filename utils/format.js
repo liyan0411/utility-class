@@ -4,10 +4,10 @@
 
 /**
  * @name 字符串大小写转化处理
- * @param  str:String
- * @param  type:Number(可选)
+ * @param  {String} str
+ * @param  {Number} type(可选)
  *       type:  1:首字母大写  2：首页母小写  3：大小写转换  4：全部大写(默认)  5：全部小写
- * @return String
+ * @return {String}
  */
 export const changeCase = (str, type = 4) => {
   type = type || 4
@@ -45,10 +45,10 @@ export const changeCase = (str, type = 4) => {
 }
 /**
  * @name 时间戳转化为年月日
- * @param times:String-时间戳
- * @param ymd:String可选-格式类型(yyyy-mm-dd,yyyy/mm/dd)
- * @param hms:String可选-格式类型(hh,hh:mm,hh:mm:ss)
- * @returns {年月日}
+ * @param {String} times 时间戳
+ * @param {String} ymd 可选-格式类型(yyyy-mm-dd,yyyy/mm/dd)
+ * @param {String} hms 可选-格式类型(hh,hh:mm,hh:mm:ss)
+ * @returns {String} 年月日||时分秒
  */
 export const timesToYyMmDd = (times, ymd = 'yyyy-mm-dd', hms = 'hh:mm:ss') => {
   const oDate = new Date(times)
@@ -84,9 +84,9 @@ export const timesToYyMmDd = (times, ymd = 'yyyy-mm-dd', hms = 'hh:mm:ss') => {
 }
 /**
  * @name HEX十六进制颜色值转换为RGBA颜色值-如#FFFFFF转RGB(255,255,255)
- * @param val:String-十六进制颜色值
- * @param aplha:Number-透明度（默认为1）
- * @return  RGBA颜色值
+ * @param {String} val 十六进制颜色值
+ * @param {Number} aplha 透明度（默认为1）
+ * @return  {String} RGBA颜色值
  */
 
 export const hexToRgba = function (val, aplha = 1) {
@@ -116,8 +116,8 @@ export const hexToRgba = function (val, aplha = 1) {
 
 /**
  * @name 将阿拉伯数字翻译成中文的大写数字
- * @param num:Number
- * @return String
+ * @param {Number} num
+ * @return {String}
  */
 export const numberToChinese = (num) => {
   var AA = new Array(
@@ -169,8 +169,8 @@ export const numberToChinese = (num) => {
 }
 /**
  * @name 将数字转换为大写金额
- * @param Num:Number
- * @return String
+ * @param {Number} Num
+ * @return {String}
  */
 export const changeToChinese = (Num) => {
   //判断如果传递进来的不是字符的话转换为字符

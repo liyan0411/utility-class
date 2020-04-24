@@ -1,8 +1,8 @@
 /**
  * @name 验证类
- * @param str:String-校验的字符串
- * @param type:String-校验类型
- * @return Boolean
+ * @param {String} str-校验的字符串
+ * @param {String} type-校验类型
+ * @return {Boolean}
  */
 export const checkStr = (str, type) => {
   switch (type) {
@@ -55,8 +55,8 @@ export const checkStr = (str, type) => {
 
 /**
  * @name 根据传入值判断是否为空（无效）
- * @param text:校验值 
- * @return Boolean 判断值状态 空（无效）返回true
+ * @param {any} text 校验值
+ * @return {Boolean} 判断值状态 空（无效）返回true
  */
 export const isEmpty = (text) => {
   if (typeof text === 'object') {
@@ -81,8 +81,8 @@ export const isEmpty = (text) => {
 }
 /**
  * @name 严格的身份证校验
- * @param str:String-校验的字符串
- * @return Boolean
+ * @param {String} str 校验的字符串
+ * @return {Boolean}
  */
 export const isCardID = (sId) => {
   if (!/(^\d{15}$)|(^\d{17}(\d|X|x)$)/.test(sId)) {
@@ -167,8 +167,8 @@ export const isCardID = (sId) => {
 
 /**
  * @name 判断数值类型，包括整数和浮点数
- * @param str:String-校验的字符串
- * @return Boolean
+ * @param {String} str 校验的字符串
+ * @return {Boolean}
  */
 export const isNumber = (str) => {
   if (isDouble(str) || isInteger(str)) return true
@@ -177,8 +177,8 @@ export const isNumber = (str) => {
 
 /**
  * @name 匹配integer
- * @param str:String-校验的字符串
- * @return Boolean
+ * @param {String} str 校验的字符串
+ * @return {Boolean}
  */
 export function isInteger(str) {
   if (str == null || str == '') return false
@@ -189,8 +189,8 @@ export function isInteger(str) {
 
 /**
  * @name 匹配double或float
- * @param str:String-校验的字符串
- * @return Boolean
+ * @param {String} str 校验的字符串
+ * @return {Boolean}
  */
 export function isDouble(str) {
   if (str == null || str == '') return false
@@ -200,8 +200,8 @@ export function isDouble(str) {
 }
 /**
  * @name 判断是否为正整数(只能输入数字[0-9])
- * @param str:String-校验的字符串
- * @return Boolean
+ * @param {String} str 校验的字符串
+ * @return {Boolean}
  */
 export const isPositiveInteger = (str) => {
   return /(^[0-9]\d*$)/.test(str)

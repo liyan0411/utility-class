@@ -3,8 +3,8 @@
  */
 /**
  * @name 本地缓存 增删改查
- * @param k:String-键
- * @param v:String||Object-值
+ * @param {String} k 键
+ * @param {String||Object} v 值
  */
 const ls = localStorage
 const ss = sessionStorage
@@ -51,8 +51,8 @@ export const db = {
 
 /**
  * @name 获取 url 后面通过?传参的参数
- * @param name:String
- * @return String
+ * @param {String} name
+ * @return {String}
  */
 export const getUrlParams = (name) => {
   var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
@@ -62,46 +62,20 @@ export const getUrlParams = (name) => {
 }
 /**
  * @name 通用版节流函数
- * @param fn:function-要被执行的方法, 相隔多长时间要被执行的方法
- * @param Intervals:number  - 间隔时间, 相隔多长时间调用一次对应方法
- * @params args:any  - 剩余参数,剩余参数将会在调用fn时作为参数传给fn
- * @params params:any  - 以下方使用例子看，resize事件被触发的时候，会在传个event对象过去，所以同样需要接收
- * @return Function
+ * @return {Function}
  */
-export const throttle = (fn, Intervals, ...args) => {
-  let timeNo
-  return (...params) => {
-    if (timeNo) return
-    timeNo = setTimeout(() => {
-      fn(...args, ...params)
-      clearTimeout(timeNo)
-      timeNo = null
-    }, Intervals)
-  }
-}
+export const throttle = () => {}
 /**
  * @name 通用版防抖函数
- * @param fn:function  - 要被执行的方法, 相隔多长时间要被执行的方法
- * @param Intervals:number  - 间隔时间, 相隔多长时间调用一次对应方法
- * @params args:any  - 剩余参数,剩余参数将会在调用fn时作为参数传给fn
- * @params params:any  - 以下方使用例子看，input事件被触发的时候，会在传个event对象过去，所以同样需要接收
- * @return Function
+ * @return {Function}
  */
-export const debounce = (fn, Intervals, ...args) => {
-  let timeNo
-  return (...params) => {
-    clearTimeout(timeNo)
-    timeNo = setTimeout(() => {
-      fn(...args, ...params)
-      clearTimeout(timeNo)
-    }, Intervals)
-  }
-}
+export const debounce = () => {}
 
 /**
  * @name 导出文件函数封装
- * @param data:Blob-后台返回的流，names:String-导出的文件名
- * @return Void
+ * @param {Blob} data 后台返回的流
+ * @param {String} names 导出的文件名
+ * @return {Void}
  */
 export const downloadFile = function (data, names) {
   if (!data) {
@@ -128,10 +102,10 @@ export const downloadFile = function (data, names) {
 
 /**
  * @name 返回指定长度的月份集合
- * @param  time:String-时间
- * @param  len:Number-长度
- * @param  direction:Numver-方向(1: 前几个月;  2: 后几个月;  3:前后几个月  默认 3)
- * @return Array 数组
+ * @param  {String} time 时间
+ * @param  {Number} len 长度
+ * @param  {Numver} direction 方向(1: 前几个月;  2: 后几个月;  3:前后几个月  默认 3)
+ * @return {Array}
  *
  * @example   getMonths('2018-1-29', 6, 1)  // ->  ["2018-1", "2017-12", "2017-11", "2017-10", "2017-9", "2017-8", "2017-7"]
  */
@@ -194,10 +168,10 @@ export const getMonths = (time, len, direction) => {
 }
 /**
  * @name 返回指定长度的天数集合
- * @param  time:String-时间
- * @param  len:Number-长度
- * @param  direction:Numver-方向(1: 前几天;  2: 后几天;  3:前后几天  默认 3)
- * @return {Array} 数组
+ * @param  {String} time 时间
+ * @param  {Number} len 长度
+ * @param  {Numver} direction 方向(1: 前几天;  2: 后几天;  3:前后几天  默认 3)
+ * @return {Array}
  *
  * @example date.getDays('2018-1-29', 6) // -> ["2018-1-26", "2018-1-27", "2018-1-28", "2018-1-29", "2018-1-30", "2018-1-31", "2018-2-1"]
  */
@@ -239,9 +213,9 @@ export const getDays = (time, len, diretion) => {
 }
 /**
  * @name 去除空格
- * @param  str:String
- * @param  type: Numver- 1-所有空格  2-前后空格  3-前空格 4-后空格
- * @return String
+ * @param  {String} str
+ * @param  {Numver} type  1-所有空格  2-前后空格  3-前空格 4-后空格
+ * @return {String}
  */
 export const trim = (str, type = 1) => {
   switch (type) {
@@ -258,7 +232,11 @@ export const trim = (str, type = 1) => {
   }
 }
 
-/*获取网址参数*/
+/**
+ * @name 获取网址参数
+ * @param {String} name 或者字段的key
+ * @return {String}
+ */
 export const getURL = (name) => {
   var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
   var r = decodeURI(window.location.search).substr(1).match(reg)
@@ -267,8 +245,8 @@ export const getURL = (name) => {
 }
 /**
  * @name 对象转URL
- * @param data:Object
- * @return String
+ * @param {Object} data
+ * @return {String}
  */
 export const urlEncode = (data) => {
   var _result = []
@@ -287,9 +265,9 @@ export const urlEncode = (data) => {
 
 /**
  * @name 遍历对象
- * @param obj:Object
- * @param callback:Function
- * @return Void
+ * @param {Object} obj
+ * @param {Function} callback
+ * @return {Void}
  */
 export const objForEach = (obj, callback) => {
   Object.keys(obj).forEach((key) => {
@@ -298,34 +276,33 @@ export const objForEach = (obj, callback) => {
 }
 /**
  * @name 判断一个元素是否在数组中
- * @param arr:Array
- * @param val:要判断的值
- * @return Boolean
+ * @param {Array} arr
+ * @param {any} val 要判断的值
+ * @return {Boolean}
  */
 export const contains = (arr, val) => {
   return arr.indexOf(val) != -1 ? true : false
 }
 /**
  * @name 求和
- * @param arr:Array
- * @return Number
+ * @param {Array} arr
+ * @return {Number}
  */
 export const sum = (arr) => {
   return arr.reduce((pre, cur) => {
     return pre + cur
   })
 }
-/** 
+/**
  * @name 随机数范围
- * @param min:Number-最小值
- * @param max:Number-最大值
- * @return Number
+ * @param {Number} min最小值
+ * @param {Number} max 最大值
+ * @return {Number}
  */
-export const random =(min, max) =>{
-    if (arguments.length === 2) {
-        return Math.floor(min + Math.random() * ( (max+1) - min ))
-    }else{
-        return null;
-    }
-    
+export const random = (min, max) => {
+  if (arguments.length === 2) {
+    return Math.floor(min + Math.random() * (max + 1 - min))
+  } else {
+    return null
+  }
 }
