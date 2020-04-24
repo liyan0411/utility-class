@@ -62,14 +62,41 @@ export const getUrlParams = (name) => {
 }
 /**
  * @name 通用版节流函数
+ * @param {Function} fn 要被执行的方法, 相隔多长时间要被执行的方法
+ * @param {Number} Intervals   间隔时间, 相隔多长时间调用一次对应方法
+ * @params {any} args   剩余参数,剩余参数将会在调用fn时作为参数传给fn
+ * @params {any} params   以下方使用例子看，resize事件被触发的时候，会在传个event对象过去，所以同样需要接收
  * @return {Function}
  */
-export const throttle = () => {}
+export const throttle = (fn, Intervals, ...args) => {
+  let timeNo
+  return (...params) => {
+    if (timeNo) return
+    timeNo = setTimeout(() => {
+      fn(...args, ...params)
+      clearTimeout(timeNo)
+      timeNo = null
+    }, Intervals)
+  }
+}
 /**
  * @name 通用版防抖函数
+ * @param {Function} fn  要被执行的方法, 相隔多长时间要被执行的方法
+ * @param {number} Intervals  间隔时间, 相隔多长时间调用一次对应方法
+ * @params {any} args  剩余参数,剩余参数将会在调用fn时作为参数传给fn
+ * @params {any} params  以下方使用例子看，input事件被触发的时候，会在传个event对象过去，所以同样需要接收
  * @return {Function}
  */
-export const debounce = () => {}
+export const debounce = (fn, Intervals, ...args) => {
+  let timeNo
+  return (...params) => {
+    clearTimeout(timeNo)
+    timeNo = setTimeout(() => {
+      fn(...args, ...params)
+      clearTimeout(timeNo)
+    }, Intervals)
+  }
+}
 
 /**
  * @name 导出文件函数封装
