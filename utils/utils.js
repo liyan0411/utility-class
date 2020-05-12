@@ -322,7 +322,7 @@ export const sum = (arr) => {
 }
 /**
  * @name 随机数范围
- * @param {Number} min最小值
+ * @param {Number} min 最小值
  * @param {Number} max 最大值
  * @return {Number}
  */
@@ -332,4 +332,34 @@ export const random = (min, max) => {
   } else {
     return null
   }
+}
+/**
+ * @name 深拷贝
+ * @param {Object} origin 原对象
+ * @param {Object} target 目标对象（默认为{}）
+ * @return {Object}
+ */
+export const deep = (origin, target) => {
+  var target = target || {}
+  for (var prop in origin) {
+    if (origin.hasOwnProperty(prop)) {
+      if (typeof origin[prop] == 'object' && typeof origin[prop] !== null) {
+        if (origin[prop] instanceof Array) {
+          target[prop] = []
+          deep(origin[prop], target[prop]) //递归调用deep
+        }
+        if (origin[prop] instanceof Object) {
+          target[prop] = {}
+          deep(origin[prop], target[prop]) //递归调用deep
+        }
+      } else if (
+        typeof origin[prop] == 'number' ||
+        typeof origin[prop] == 'string' ||
+        typeof origin[prop] == 'boolean'
+      ) {
+        target[prop] = origin[prop]
+      }
+    }
+  }
+  return target
 }
