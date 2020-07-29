@@ -270,6 +270,42 @@ export const getURL = (name) => {
   if (r != null) return r[2]
   return null
 }
+/*获取全部url参数,并转换成json对象*/
+export const getUrlAllParams = (url) => {
+    var url = url ? url : window.location.href;
+    var _pa = url.substring(url.indexOf('?') + 1),
+        _arrS = _pa.split('&'),
+        _rs = {};
+    for (var i = 0, _len = _arrS.length; i < _len; i++) {
+        var pos = _arrS[i].indexOf('=');
+        if (pos == -1) {
+            continue;
+        }
+        var name = _arrS[i].substring(0, pos),
+            value = window.decodeURIComponent(_arrS[i].substring(pos + 1));
+        _rs[name] = value;
+    }
+    return _rs;
+}
+/*删除url指定参数，返回url*/
+export const delParamsUrl=(url, name)=>{
+    var baseUrl = url.split('?')[0] + '?';
+    var query = url.split('?')[1];
+    if (query.indexOf(name)>-1) {
+        var obj = {}
+        var arr = query.split("&");
+        for (var i = 0; i < arr.length; i++) {
+            arr[i] = arr[i].split("=");
+            obj[arr[i][0]] = arr[i][1];
+        };
+        delete obj[name];
+        var url = baseUrl + JSON.stringify(obj).replace(/[\"\{\}]/g,"").replace(/\:/g,"=").replace(/\,/g,"&");
+        return url
+    }else{
+        return url;
+    }
+}
+
 /**
  * @name 对象转URL
  * @param {Object} data
@@ -362,4 +398,76 @@ export const deep = (origin, target) => {
     }
   }
   return target
+}
+// 是否为 ios
+export const isIos = () => {
+  var u = navigator.userAgent
+  if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {
+    //安卓手机
+    // return "Android";
+    return false
+  } else if (u.indexOf('iPhone') > -1) {
+    //苹果手机
+    // return "iPhone";
+    return true
+  } else if (u.indexOf('iPad') > -1) {
+    //iPad
+    // return "iPad";
+    return false
+  } else if (u.indexOf('Windows Phone') > -1) {
+    //winphone手机
+    // return "Windows Phone";
+    return false
+  } else {
+    return false
+  }
+}
+
+// 是否为PC端
+export const isPC = () => {
+  var userAgentInfo = navigator.userAgent
+  var Agents = [
+    'Android',
+    'iPhone',
+    'SymbianOS',
+    'Windows Phone',
+    'iPad',
+    'iPod',
+  ]
+  var flag = true
+  for (var v = 0; v < Agents.length; v++) {
+    if (userAgentInfo.indexOf(Agents[v]) > 0) {
+      flag = false
+      break
+    }
+  }
+  return flag
+}
+// 获取浏览器名称
+export const browserType = () =>{
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器
+    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
+    var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+    var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器  
+    var isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器
+    var isSafari = userAgent.indexOf("Safari") > -1 && userAgent.indexOf("Chrome") == -1; //判断是否Safari浏览器
+    var isChrome = userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Safari") > -1; //判断Chrome浏览器
+
+    if (isIE) {
+        var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+        reIE.test(userAgent);
+        var fIEVersion = parseFloat(RegExp["$1"]);
+        if(fIEVersion == 7) return "IE7"
+        else if(fIEVersion == 8) return "IE8";
+        else if(fIEVersion == 9) return "IE9";
+        else if(fIEVersion == 10) return "IE10";
+        else return "IE7以下"//IE版本过低
+    }
+    if (isIE11) return 'IE11';
+    if (isEdge) return "Edge";
+    if (isFF) return "FF";
+    if (isOpera) return "Opera";
+    if (isSafari) return "Safari";
+    if (isChrome) return "Chrome";
 }
