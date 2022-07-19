@@ -43,6 +43,12 @@ export const changeCase = (str, type = 4) => {
       return str
   }
 }
+export const getzf=(num)=> {
+  if (parseInt(num) < 10) {
+    num = '0' + num
+  }
+  return num
+}
 /**
  * @name 时间戳转化为年月日
  * @param {String} times 时间戳
